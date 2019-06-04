@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>鲤鱼作业提交</title>
+    <link rel="stylesheet" type="text/css" href="/vender/ui.admin/static/h-ui/css/H-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="/vender/ui.admin/static/h-ui.admin/css/H-ui.admin.css" />
+    <link rel="stylesheet" type="text/css" href="/vender/ui.admin/lib/Hui-iconfont/1.0.8/iconfont.css" />
+</head>
+
+<body>
+    <div style="margin-left: 100px;">
+        <form action="/upload" method="post"  id="form-avatar" enctype="multipart/form-data">
+            <h2>提交作业</h2>
+            <!-- <input type="file" name="logo"> -->
+            <div class="row cl">
+                <div class="formControls col-xs-8 col-sm-9"> <span class="btn-upload form-group">
+				<input class="input-text upload-url" type="text" name="uploadfile" id="uploadfile" readonly nullmsg="请添加附件！" style="width:200px">
+				<a href="javascript:void();" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i> 浏览文件</a>
+				<input type="file" name="logo"  multiple  class="input-file" id="file">
+				</span> </div>
+            </div>
+           <!--  <div class="row cl" style="margin-left: 2px;margin-top: 20px">
+                <input class="btn btn-primary radius" type="submit" id="check" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+            </div>
+ -->    	</form>
+    </div>
+</body>
+<script type="text/javascript" src="/vender/ui.admin/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="/vender/ui.admin/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="/vender/ui.admin/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="/vender/ui.admin/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="/vender/ui.admin/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" src="/vender/ui.admin/static/h-ui/js/H-ui.js"></script>
+<script type="text/javascript" src="/vender/ui.admin/static/h-ui.admin/js/H-ui.admin.page.js"></script>
+<script>
+	// $('#check').click(function(e){
+	// 	if($("#file").val()==""){
+	// 		alert("请选选择作业!")
+	// 		return false;
+	// 	}	
+	// });
+        //修改头像
+    $(".input-file").on('change', function(e) {
+        var formData = new FormData($("#form-avatar")[0]);
+        $.ajax({
+            url: "/upload",
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                if (data.status) {
+                    // $("#form-avatar img").attr("src",data.data);
+                    alert("提交成功,请删除你电脑上的文件并且带好资料自行离开！谢谢");
+
+                }
+            },
+        });
+    });
+</script>
+</html>
